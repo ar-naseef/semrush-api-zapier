@@ -2,11 +2,10 @@ let output;
 
 const execute = async (inputData) => {
   const domain = inputData.domain;
-  const country_code = inputData.country_code;
   const SEMRUSH_API_KEY = "ca84468a054b06b7208f89ee0d68576d";
 
   const response = await fetch(
-    `https://api.semrush.com/?type=domain_ranks&key=${SEMRUSH_API_KEY}&domain=${domain}&database=${country_code}`
+    `https://api.semrush.com/analytics/v1/?key=${SEMRUSH_API_KEY}&type=backlinks_overview&target=${domain}&target_type=root_domain&export_columns=ascore,total,domains_num,urls_num,ips_num,ipclassc_num,follows_num,nofollows_num,sponsored_num,ugc_num,texts_num,images_num,forms_num,frames_num`
   ).then((response) => response.text());
 
   const keys = response
@@ -31,13 +30,13 @@ const execute = async (inputData) => {
   console.log("response >>", jsonResp);
 
   output = {
-    traffic: jsonResp[0]["Organic Traffic"],
+    score: jsonResp[0]["ascore"],
   };
 
   console.log("output >>", output);
 };
 
 execute({
-  domain: "kitchentime.se",
+  domain: "semrush.com",
   country_code: "se",
 });
