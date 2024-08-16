@@ -3,7 +3,8 @@ let output;
 const execute = async (inputData) => {
   const domain = inputData.domain;
   const country_code = inputData.country_code;
-  const SEMRUSH_API_KEY = "ca84468a054b06b7208f89ee0d68576d";
+  const store = StoreClient("0173e497-f250-494c-80ba-1adab8b8f16e");
+  const SEMRUSH_API_KEY = await store.get("semrush_api_key");
 
   const response = await fetch(
     `https://api.semrush.com/?type=domain_ranks&key=${SEMRUSH_API_KEY}&domain=${domain}&database=${country_code}`
@@ -32,6 +33,7 @@ const execute = async (inputData) => {
 
   output = {
     traffic: jsonResp[0]["Organic Traffic"],
+    SEMRUSH_API_KEY: SEMRUSH_API_KEY,
   };
 
   console.log("output >>", output);
