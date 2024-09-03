@@ -33,7 +33,7 @@ const execute = async (inputData) => {
 
   output = {
     traffic: jsonResp[0]["Organic Traffic"],
-    SEMRUSH_API_KEY: SEMRUSH_API_KEY,
+    est_adwords_cost: jsonResp[0]["Adwords Cost"],
   };
 
   console.log("output >>", output);
